@@ -31,3 +31,12 @@ void Node::setOpen(int adre, int kind){
         break;
     }
 }
+
+int Node::sameCoor(int thex, int they){
+    if(thex == x && they == y){
+        return SAME;
+    }
+    if(thex == x)return SAMEX;
+    if(they == y)return SAMEY;
+    return DIFF;
+}
