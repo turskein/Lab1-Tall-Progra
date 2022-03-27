@@ -3,16 +3,19 @@
 Node::Node(int x, int y){
     Node::x = x;
     Node::y = y;
+    /*
     Node::r = 1;
     Node::l = 1;
     Node::u = 1;
     Node::d = 1;
+    */
 }
 Node::Node(){
     Node::x = -1;
     Node::y = -1;
 }
 
+/*
 void Node::setOpen(int adre, int kind){
     switch (adre){
     case RIGHT:
@@ -31,6 +34,7 @@ void Node::setOpen(int adre, int kind){
         break;
     }
 }
+*/
 
 int Node::sameCoor(int thex, int they){
     if(thex == x && they == y){
@@ -40,3 +44,22 @@ int Node::sameCoor(int thex, int they){
     if(they == y)return SAMEY;
     return DIFF;
 }
+
+bool Node::isVoid(){
+    if(x == -1 || y == -1) return true;
+    return false;
+}
+
+void Node::setCoor(int newx, int newy){
+    x = newx;
+    y = newy;
+}
+
+void Node::setVoid(){
+    x = -1;
+    y = -1;
+}
+
+int Node::getX(){ return x;}
+
+int Node::getY(){ return y;}

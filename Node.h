@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 
 #define RIGHT   0
 #define LEFT    1
@@ -12,12 +11,17 @@
 #define OPEN    1
 #define CLOSE   0
 
-class Node{
+class Node {
 private:
-    int x, y, r, l ,u, d;
+    int x, y;//, r, l ,u, d;
 public:
     Node();
     Node(int x, int y);
+    int getX();
+    int getY();
+    bool isVoid();
     void setOpen(int adre, int kind);
     int sameCoor(int thex, int they);
+    void setCoor(int newx, int newy);
+    void setVoid();
 };

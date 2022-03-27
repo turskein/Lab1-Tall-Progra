@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include "Stack.h"
+#include "Heap.h"
 
 using namespace std;
 
