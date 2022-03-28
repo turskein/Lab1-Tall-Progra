@@ -1,11 +1,17 @@
 #include "Stack.h"
 
+/*Constructor de stack, se ingresa el largo
+del stack y su largo sera el cuadrado del ingresado*/
 Stack::Stack(int large){
-    Stack::pila = new int[100*large];
+    Stack::pila = new int[2*large];
     Stack::l = large;
     Stack::p = 0;
     Stack::pila[p] = -1;
     Stack::pila[p+1] = -1;
+}
+
+Stack::~Stack(){
+    delete[] pila;
 }
 
 void Stack::push(int x, int y){

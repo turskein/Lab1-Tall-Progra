@@ -1,5 +1,6 @@
 #include "Maze.h"
 
+/*Constructor de */
 Maze::Maze(int dim, int p) {
         srand(time(NULL)); // set seed for random number generator
     Maze::dim = dim;
@@ -51,24 +52,36 @@ void Maze::print(){
 }
 
 void Maze::solve(){
-    Stack xVisit(2*dim);
+    /*Se genera un stack de los nodos por visitar*/
+    Stack xVisit(dim*dim);
+    /*Se genera un heap que contendra los nodos visitados*/
     Heap visited(dim);
+    /*Se ingresa dentro del stack el nodo (0,0) */
     xVisit.push(0,0);
+    /*Se asume como visitado*/
     visited.addCoor(0,0);
     int avisitarX, avisitarY;
     while(!xVisit.isVoid()){
+        /*Se obtienen las coordendas del nodo tope*/
         avisitarX = xVisit.topX();
         avisitarY = xVisit.topY();
+        /*Se esta visitando por lo que se retira del stack*/
         xVisit.pop();
-
+        /*En caso de encontrar el nodo salida se termina la funcion*/
          if (arr[avisitarX][avisitarY] == OUT_DOOR)
         {
             cout << "Se encontro la salidaaaa\n";
+            xVisit.~Stack();
+            visited.~Heap();
             return;
         }
         /*Movimiento hacia la izquierda*/
         if (avisitarX > 0){
+            /*En caso de ser hacia una PARED el movimiento, sencillamente no se realiza*/
             if (arr[avisitarX - 1][avisitarY] != WALL){
+                /*Considerando que addCoor() es un metodo de tipo booleano se
+                emplea para verificar si se pudo o no ingresar el nuevo nodo
+                y por lo tanto en agregar por visitar o no*/
                 if (visited.addCoor(avisitarX - 1, avisitarY)){
                     xVisit.push(avisitarX - 1, avisitarY);
                 }
@@ -105,5 +118,9 @@ void Maze::solve(){
             }
         }
     }
+    /*Considerando que el stack se vacio y no se consiguio camino hacia la salida
+    tan solo se termina la funcion*/
     cout << "No hay camino :(\n";
+    xVisit.~Stack();
+    visited.~Heap();
 }

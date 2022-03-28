@@ -8,6 +8,12 @@ Heap::Heap(int dim){
     }
 }
 
+Heap::~Heap(){
+    for(int i = 0; i < dim; i ++){
+        delete[] matriz[i];
+    }
+}
+
 /*Se agrega una coordenada al heap, en caso de existir un par ordenado,
 identico no sera posible agregarlo.
 

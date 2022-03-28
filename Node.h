@@ -11,12 +11,15 @@
 #define OPEN    1
 #define CLOSE   0
 
+/*Representacion abstracta de dos coordenadas
+en un nodo*/
 class Node {
 private:
     int x, y;//, r, l ,u, d;
 public:
     Node();
     Node(int x, int y);
+    ~Node();
     int getX();
     int getY();
     bool isVoid();
