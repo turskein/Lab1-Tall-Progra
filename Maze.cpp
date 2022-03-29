@@ -125,7 +125,7 @@ void Maze::solve(){
         cout << "Se encontro un camino :D\n";
         visited.getWay(dim-1,dim-1);
     }else{
-        cout << "No se encontro un camino )':";
+        cout << "No se encontro un camino )':\n";
     }
     return;
 }

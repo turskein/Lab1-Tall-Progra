@@ -116,28 +116,31 @@ void Heap::show(){
 }
 void Heap::getWay(int lastx, int lasty){
     int j, i;
+    int count = 0;
     while (lastx != 0 || lasty != 0){
         j = 0;
         for (i = 0; i < dim; i++){
             if(matriz[i][j].sameCoor(lastx,lasty) == SAME){
                 lastx = matriz[i][j].getpX();
                 lasty = matriz[i][j].getpY();
-                cout << matriz[i][j].getpX() << " - " << matriz[i][j].getpY() << " ; ";
+                cout << matriz[i][j].getpX() << "-" << matriz[i][j].getpY() << "; ";
+                count++;
                 i = dim;
             }else if(matriz[i][j].sameCoor(lastx,lasty) == SAMEX){
                 while (j < dim){
                     if (matriz[i][j].sameCoor(lastx,lasty) == SAME){
                         lastx = matriz[i][j].getpX();
                         lasty = matriz[i][j].getpY();
-                        cout << matriz[i][j].getpX() << " - " << matriz[i][j].getpY() << " ; ";
+                        cout << matriz[i][j].getpX() << "-" << matriz[i][j].getpY() << "; ";
                         j = dim;
                         i = dim;
+                        count++;
                     }
                     j ++;
                 }
             }
         }
     }
-    cout << "\n";
+    cout <<"Resolverd in: "<< (count) << "\n";
 }
 
