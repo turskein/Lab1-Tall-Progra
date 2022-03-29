@@ -7,7 +7,7 @@ int main() {
     double time;
     cout<< "Enter one number that will be distance of the maze: ";
     cin >> n;
-    Maze m(n, 90);
+    Maze m(n, 80);
     k = 1;
     while(k){
         cout << "--------------\n";
@@ -23,6 +23,7 @@ int main() {
         case 1:
             m.print();
             cout << "\n";
+            break;
         case 2:
             t0 = clock();
             m.solve();

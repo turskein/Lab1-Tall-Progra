@@ -15,16 +15,22 @@
 en un nodo*/
 class Node {
 private:
-    int x, y;//, r, l ,u, d;
+    int x, y, px, py, c;//, r, l ,u, d;
 public:
     Node();
     Node(int x, int y);
+    Node(int x, int y, int px, int py);
     ~Node();
     int getX();
     int getY();
+    int getpX();
+    int getpY();
+    int getC();
     bool isVoid();
     void setOpen(int adre, int kind);
     int sameCoor(int thex, int they);
     void setCoor(int newx, int newy);
+    void setpCoor(int newpx, int newpy);
     void setVoid();
+    void setC(int newc);
 };

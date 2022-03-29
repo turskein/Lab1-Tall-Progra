@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
-#include "Stack.h"
 #include "Heap.h"
+#include "Stack.h"
 
 using namespace std;
 
@@ -19,8 +19,10 @@ public:
     void print();
     void solve(); // solve best path
     void generate(); // generate random maze
+    void showRoute();
 private:
     int dim;
     int **arr;
     int void_percentage;
+    Heap route = Heap(1);
 };

@@ -57,24 +57,17 @@ void Maze::solve(){
     /*Se genera un heap que contendra los nodos visitados*/
     Heap visited(dim);
     /*Se ingresa dentro del stack el nodo (0,0) */
-    xVisit.push(0,0);
+    xVisit.push(0,0,0);
     /*Se asume como visitado*/
-    visited.addCoor(0,0);
-    int avisitarX, avisitarY;
+    visited.addCoor(0,0,0,0,0);
+    int avisitarX, avisitarY, avisitarC;
     while(!xVisit.isVoid()){
         /*Se obtienen las coordendas del nodo tope*/
-        avisitarX = xVisit.topX();
-        avisitarY = xVisit.topY();
+        avisitarX = xVisit.topX(); // Coordenada x
+        avisitarY = xVisit.topY(); // Coordenada y
+        avisitarC = xVisit.topC(); // Coste hasta la coordenada en que nos encontramos
         /*Se esta visitando por lo que se retira del stack*/
         xVisit.pop();
-        /*En caso de encontrar el nodo salida se termina la funcion*/
-         if (arr[avisitarX][avisitarY] == OUT_DOOR)
-        {
-            cout << "Se encontro la salidaaaa\n";
-            xVisit.~Stack();
-            visited.~Heap();
-            return;
-        }
         /*Movimiento hacia la izquierda*/
         if (avisitarX > 0){
             /*En caso de ser hacia una PARED el movimiento, sencillamente no se realiza*/
@@ -82,8 +75,10 @@ void Maze::solve(){
                 /*Considerando que addCoor() es un metodo de tipo booleano se
                 emplea para verificar si se pudo o no ingresar el nuevo nodo
                 y por lo tanto en agregar por visitar o no*/
-                if (visited.addCoor(avisitarX - 1, avisitarY)){
-                    xVisit.push(avisitarX - 1, avisitarY);
+                if (visited.addCoor(avisitarX - 1, avisitarY, avisitarC + 1, avisitarX, avisitarY))
+                {
+                    xVisit.push(avisitarX - 1, avisitarY, avisitarC + 1);
+                    //cout << (avisitarX - 1) << " - " << avisitarY << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
                 }
             }
         }
@@ -92,8 +87,10 @@ void Maze::solve(){
         {
             if (arr[avisitarX + 1][avisitarY] != WALL)
             {
-                if (visited.addCoor(avisitarX + 1, avisitarY)){
-                    xVisit.push(avisitarX + 1, avisitarY);
+                if (visited.addCoor(avisitarX + 1, avisitarY, avisitarC + 1, avisitarX, avisitarY))
+                {
+                    xVisit.push(avisitarX + 1, avisitarY, avisitarC + 1);
+                    //cout << (avisitarX + 1) << " - " << avisitarY << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
                 }
             }
         }
@@ -102,8 +99,10 @@ void Maze::solve(){
         {
             if (arr[avisitarX][avisitarY - 1] != WALL)
             {
-                if (visited.addCoor(avisitarX , avisitarY - 1)){
-                    xVisit.push(avisitarX, avisitarY - 1);
+                if (visited.addCoor(avisitarX, avisitarY - 1, avisitarC + 1, avisitarX, avisitarY))
+                {
+                    xVisit.push(avisitarX, avisitarY - 1, avisitarC + 1);
+                    //cout << avisitarX << " - " << (avisitarY-1) << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
                 }
             }
         }
@@ -112,15 +111,25 @@ void Maze::solve(){
         {
             if (arr[avisitarX][avisitarY+1] != WALL)
             {
-                if (visited.addCoor(avisitarX, avisitarY+1)){
-                    xVisit.push(avisitarX, avisitarY + 1);
+                if (visited.addCoor(avisitarX, avisitarY + 1, avisitarC + 1, avisitarX, avisitarY))
+                {
+                    xVisit.push(avisitarX, avisitarY + 1, avisitarC + 1);
+                    //cout << avisitarX << " - " << (avisitarY + 1) << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
                 }
             }
         }
     }
-    /*Considerando que el stack se vacio y no se consiguio camino hacia la salida
-    tan solo se termina la funcion*/
-    cout << "No hay camino :(\n";
     xVisit.~Stack();
-    visited.~Heap();
+    route = visited;
+    if(visited.exist(dim-1,dim-1)){
+        cout << "Se encontro un camino :D\n";
+        visited.getWay(dim-1,dim-1);
+    }else{
+        cout << "No se encontro un camino )':";
+    }
+    return;
+}
+
+void Maze::showRoute(){
+    route.getWay(dim-1,dim-1);
 }

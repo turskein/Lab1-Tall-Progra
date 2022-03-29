@@ -10,10 +10,11 @@ private:
 public:
     Stack(int large);
     ~Stack();
-    void push(int x, int y);
+    void push(int x, int y, int c);
     void pop();
     int topX();
     int topY();
+    int topC();
     bool isVoid();
     void show();
 };

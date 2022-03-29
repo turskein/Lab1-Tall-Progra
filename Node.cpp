@@ -5,6 +5,7 @@ ingresadas*/
 Node::Node(int x, int y){
     Node::x = x;
     Node::y = y;
+    Node::c = -1;
     /*
     Node::r = 1;
     Node::l = 1;
@@ -17,9 +18,21 @@ Node::Node(int x, int y){
 Node::Node(){
     Node::x = -1;
     Node::y = -1;
+    Node::c = -1;
+    Node::px = -1;
+    Node::py = -1;
 }
 
-Node::~Node(){}
+Node::Node(int x, int y, int px, int py){
+    Node::x = x;
+    Node::y = y;
+    Node::c = -1;
+    Node::px = px;
+    Node::py = py;
+}
+
+Node::~Node(){
+}
 
 /*
 void Node::setOpen(int adre, int kind){
@@ -76,8 +89,23 @@ void Node::setVoid(){
     y = -1;
 }
 
+void Node::setpCoor(int newpx, int newpy){
+    px = newpx;
+    py = newpy;
+}
+
+void Node::setC(int newc){
+    c = newc;
+}
+
 /*retorna la coordenada x*/
 int Node::getX(){ return x;}
 
 /*retorna la coordenada y*/
 int Node::getY(){ return y;}
+/*Retorna la coordenada x del nodo que precede a este*/
+int Node::getpX(){return px;}
+/*Retorna la coordenada y del nodo que precede a este*/
+int Node::getpY() { return py;}
+/*retorna el costo de este nodo*/
+int Node::getC(){return c;}
