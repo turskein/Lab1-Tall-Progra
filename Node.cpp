@@ -1,17 +1,22 @@
 #include "Node.h"
 
+
 /*Constructor de nodos con coordenadas
 ingresadas*/
 Node::Node(int x, int y){
     Node::x = x;
     Node::y = y;
     Node::c = -1;
-    /*
-    Node::r = 1;
-    Node::l = 1;
-    Node::u = 1;
-    Node::d = 1;
-    */
+    Node::previous = NULL;
+    Node::next = NULL;
+}
+
+Node::Node(int x, int y, int c, Node *previous){
+    Node::x = x;
+    Node::y = y;
+    Node::c = c;
+    Node::previous = previous;
+    Node::next = NULL;
 }
 
 /*Constructor de nodos asumiendolo como vacio*/
@@ -19,16 +24,24 @@ Node::Node(){
     Node::x = -1;
     Node::y = -1;
     Node::c = -1;
-    Node::px = -1;
-    Node::py = -1;
+    Node::previous = NULL;
+    Node::next = NULL;
 }
 
-Node::Node(int x, int y, int px, int py){
+Node::Node(int x, int y, Node *previous){
     Node::x = x;
     Node::y = y;
     Node::c = -1;
-    Node::px = px;
-    Node::py = py;
+    Node::previous = previous;
+    Node::next = NULL;
+}
+
+Node::Node(int x, int y, Node *previous, Node *next){
+    Node::x = x;
+    Node::y = y;
+    Node::c = -1;
+    Node::previous = previous;
+    Node::next = next;
 }
 
 Node::~Node(){
@@ -89,13 +102,23 @@ void Node::setVoid(){
     y = -1;
 }
 
-void Node::setpCoor(int newpx, int newpy){
-    px = newpx;
-    py = newpy;
+void Node::setPrevious(Node *previous){
+    this->previous = previous;
+}
+
+void Node::setNext(Node *next){
+    this->previous = previous;
 }
 
 void Node::setC(int newc){
     c = newc;
+}
+
+void Node::betterPrevious(int c, Node *previous){
+    if(c < this->c){
+        this->previous = previous;
+        this->c = c;
+    }
 }
 
 /*retorna la coordenada x*/
@@ -104,8 +127,13 @@ int Node::getX(){ return x;}
 /*retorna la coordenada y*/
 int Node::getY(){ return y;}
 /*Retorna la coordenada x del nodo que precede a este*/
-int Node::getpX(){return px;}
-/*Retorna la coordenada y del nodo que precede a este*/
-int Node::getpY() { return py;}
+Node* Node::getPrevious(){
+    return this->previous;
+}
+
+Node* Node::getNext(){
+    return this->next;
+}
+
 /*retorna el costo de este nodo*/
 int Node::getC(){return c;}

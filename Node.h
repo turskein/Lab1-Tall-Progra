@@ -1,3 +1,5 @@
+#ifndef Nodo_
+#define Nodo_
 #include <iostream>
 
 #define RIGHT   0
@@ -15,22 +17,43 @@
 en un nodo*/
 class Node {
 private:
-    int x, y, px, py, c;//, r, l ,u, d;
+    int x, y, c;//, r, l ,u, d;
+    Node *previous, *next;
 public:
+    //Constructores
     Node();
     Node(int x, int y);
-    Node(int x, int y, int px, int py);
+    Node(int x, int y, int c, Node *previous);
+    Node(int x, int y, Node *previous);
+    Node(int x, int y, Node *previous, Node *next);
     ~Node();
+
+    //Getters
     int getX();
     int getY();
-    int getpX();
-    int getpY();
     int getC();
+    Node* getPrevious();
+    Node* getNext();
+    
+    //Cuestionadores
     bool isVoid();
-    void setOpen(int adre, int kind);
     int sameCoor(int thex, int they);
+    /*
+    bool canGoNorth();
+    bool canGoSouth();
+    bool canGoEast();
+    bool canGoWest
+    bool canGoNorth();
+    bool canGoNorth();
+    */
+
+    //Setters
     void setCoor(int newx, int newy);
-    void setpCoor(int newpx, int newpy);
+    void setPrevious(Node *newPrevious);
+    void setNext(Node *newNext);
     void setVoid();
     void setC(int newc);
+    void betterPrevious(int c, Node *previous);
 };
+
+#endif
