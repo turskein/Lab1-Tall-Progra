@@ -3,11 +3,13 @@
 
 int main() {
     unsigned t0, t1;
-    int n, option, k, newn, newperc;
+    int n, option, k, perc;
     double time;
     cout<< "Enter one number that will be distance of the maze: ";
     cin >> n;
-    Maze m(n, 80);
+    cout << "Enter void percentage of the maze: ";
+    cin >> perc;
+    Maze m(n, perc);
     k = 1;
     while(k){
         cout << "--------------\n";
@@ -34,10 +36,10 @@ int main() {
             break;
         case 3:
             cout << "Enter new dimensions: ";
-            cin >> newn;
+            cin >> n;
             cout << "Enter new void percentage: ";
-            cin >> newperc;
-            m = Maze(newn, newperc);
+            cin >> perc;
+            m = Maze(n, perc);
             break;
         }
     }
