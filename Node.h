@@ -17,27 +17,24 @@
 en un nodo*/
 class Node {
 private:
-    int x, y, c;//, r, l ,u, d;
-    Node *previous, *next;
+    int c, prevX, prevY, nextX, nextY;
+    bool visited;
 public:
     //Constructores
     Node();
-    Node(int x, int y);
-    Node(int x, int y, int c, Node *previous);
-    Node(int x, int y, Node *previous);
-    Node(int x, int y, Node *previous, Node *next);
+    Node(int c, int prevX, int prevY);
+    Node(int c, int prevX, int prevY, int nextX, int nextY);
     ~Node();
 
     //Getters
-    int getX();
-    int getY();
     int getC();
-    Node* getPrevious();
-    Node* getNext();
+    int getPrevX();
+    int getPrevY();
+    int getNextX();
+    int getNextY();
     
     //Cuestionadores
-    bool isVoid();
-    int sameCoor(int thex, int they);
+    bool isVisited();
     /*
     bool canGoNorth();
     bool canGoSouth();
@@ -47,13 +44,12 @@ public:
     bool canGoNorth();
     */
 
+    void setPrev(int prevX, int prevY);
     //Setters
-    void setCoor(int newx, int newy);
-    void setPrevious(Node *newPrevious);
-    void setNext(Node *newNext);
-    void setVoid();
+    void setNext(int nextX, int nextY);
+    void setVisited();
     void setC(int newc);
-    void betterPrevious(int c, Node *previous);
+    void betterPrev(int theC, int prevX, int prevY);
 };
 
 #endif

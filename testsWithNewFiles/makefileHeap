@@ -1,0 +1,11 @@
+testeoH: Heap.o NodeH.o test_Heap_1.cpp
+	g++ NodeH.o Heap.o test_Heap_1.cpp -o a
+
+Heap.o: Heap.h Heap.cpp
+	g++ -c Heap.cpp
+
+NodeH.o: NodeH.cpp NodeH.h
+	g++ -c NodeH.cpp
+
+run:
+	./a

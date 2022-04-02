@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-#include "Node.h"
+#include "NodeH.h"
 using namespace std;
 
 /*
@@ -11,13 +11,13 @@ public:
     Heap(int size);
     ~Heap();
     int isEmpty();
-    void insert(Node *node);
-    Node* pull();
+    void insert(NodeH *NodeH);
+    NodeH* pull();
     int peek();
     int getSize();
     void print();
 private:
-    Node *arr;
+    NodeH *arr;
     int size;
     int count;
     void swap(int i, int j);

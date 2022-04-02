@@ -1,9 +1,9 @@
 #include "Heap.h"
 
 Heap::Heap(int size) {
-    size = size;
-    count = 0;
-    arr = new Node[size];
+    Heap::size = size;
+    Heap::count = 0;
+    arr = new NodeH[size];
 }
 
 Heap::~Heap() {
@@ -14,12 +14,12 @@ int Heap::getSize() {
     return size;
 }
 
-void Heap::insert(Node *node) {
+void Heap::insert(NodeH *NodeH) {
     if (count == size) {
         cout << "Heap is full" << endl;
         return;
     }
-    arr[count] = *node; // Notice: copy the node
+    arr[count] = *NodeH; // Notice: copy the NodeH
     count++;
     bubbleUp();
 }
@@ -41,9 +41,9 @@ void Heap::print() {
 /* 
     a: index of the level in the heap. Root is at level 0.
     b: index of the column in the level. Root is at column 0.
-    k: index of the node in the heap.
-    (1<<a) = 2^a. Each row has 2^a nodes.
-    (1<<a)-1 + b is the index of the node in the heap.
+    k: index of the NodeH in the heap.
+    (1<<a) = 2^a. Each row has 2^a NodeHs.
+    (1<<a)-1 + b is the index of the NodeH in the heap.
     k = (1<<a)-1 + b
     The height of the heap is log2(count)=log(count)/log(2).
 */
@@ -58,20 +58,20 @@ void Heap::print() {
     }
 }
 
-Node* Heap::pull() {
+NodeH* Heap::pull() {
     if (isEmpty()) {
         cout << "Heap is empty" << endl;
         return NULL;
     }
-    Node *node = new Node(arr[0]);
+    NodeH *nodeH = new NodeH(arr[0]);
     arr[0] = arr[count - 1];
     count--;
     bubbleDown();
-    return node;
+    return nodeH;
 }
 
 void Heap::swap(int i, int j) {
-    Node temp = arr[i];
+    NodeH temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
 }

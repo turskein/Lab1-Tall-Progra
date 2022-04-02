@@ -1,90 +1,93 @@
 #include "Node.h"
 
-Node::Node() {
-    this->i = 0;
-    this->j = 0;
-    this->value = 0;
-    this->depth = -1;
-    this->previous = NULL;
-    this->next = NULL;
+
+/*Constructor de nodos con coordenadas
+ingresadas*/
+Node::Node(){
+    Node::c = -1;
+    Node::prevX = -1;
+    Node::prevY = -1;
+    Node::nextX = -1;
+    Node::nextY = -1;
+    Node::visited = false;
 }
 
-Node::Node(Node* node) {
-    this->i = node->i;
-    this->j = node->j;
-    this->value = node->value;
-    this->depth = node->depth;
-    this->previous = node->previous;
-    this->next = node->next;
+Node::Node(int c, int prevX, int prevY){
+    Node::c = c;
+    Node::prevX = prevX;
+    Node::prevY = prevY;
+    Node::nextX = -1;
+    Node::nextY = -1;
+    Node::visited = false;
 }
 
-Node::Node(int i, int j, int value, Node* parent) {
-    this->i = i;
-    this->j = j;
-    this->value = value;
-    this->previous = parent;
+Node::Node(int c, int prevX, int prevY, int nextX, int nextY){
+    Node::c = c;
+    Node::prevX = prevX;
+    Node::prevY = prevY;
+    Node::nextX = nextX;
+    Node::nextY = nextY;
+    Node::visited = false;
 }
 
-Node::~Node () {
+Node::~Node(){
 }
 
-int Node::get_i() {
-    return this->i;
+/*Verifica si las coordenadas ingresadas coinciden
+con las del nodo. En caso de ser ambas coordenadas
+iguales se retorna SAME (3); solo x igual, SAMEX 
+(1); solo y igual, SAMEY (2) y, si ninguno es igual
+DIFF (0)*/
+
+/*Verifica si el nodo esta vacio, si el nodo tiene
+los valores de x=-1 e y=-1 se asume vacio*/
+bool Node::isVisited(){
+    return this->visited;
 }
 
-int Node::get_j() {
-    return this->j;
+/*Vacia el nodo, es decir, los valores de x e y
+los igual a -1*/
+
+void Node::setPrev(int prevX, int prevY){
+    this->prevX = prevX;
+    this->prevY = prevY;
 }
 
-Node* Node::getPrevious() {
-    return this->previous;
+void Node::setNext(int nextX, int nextY){
+    this->nextX = nextX;
+    this->nextY = nextY;
 }
 
-Node* Node::getNext(){
-    return this->next;
+void Node::setC(int newc){
+    c = newc;
 }
 
-int Node::getValue() {
-    return this->value;
+void Node::setVisited(){
+    this->visited = true;
 }
 
-void Node::setPrevious(Node* previous) {
-    this->previous = previous;
-}
-
-void Node::setNext(Node* next){
-    this->next = next;
-}
-
-void Node::setDepth(int depth) {
-    this->depth = depth;
-}
-
-int Node::isRoot() {
-    return this->previous == NULL;
-}
-
-void Node::print() {
-    cout << "(" << this->i << "," << this->j << ")[" << this->value << "]" << endl;
-}
-
-int Node::getDepth() {
-    return(this->depth);    
-}
-
-// the path from the root to the current node as a string
-string Node::getPathPrevious() {
-    /*
-    string s="("+to_string(this->i)+","+to_string(this->j)+")";
-    if (this->previous != NULL) {
-        s=s+this->previous->getPath();
+void Node::betterPrev(int theC, int prevX, int prevY){
+    if(theC < c){
+        setPrev(prevX, prevY);
+        this->c = theC;
     }
-    return(s); 
-    */
-
-    return "("+to_string(this->i)+","+to_string(this->j)+")"+(this->previous != NULL ? this->previous->getPathPrevious():"");
 }
 
-string Node::getPathNext() {
-    return "("+to_string(this->i)+","+to_string(this->j)+")"+(this->next != NULL ? this->next->getPathNext():"");
+/*Retorna la coordenada x del nodo que precede a este*/
+int Node::getPrevX(){
+    return prevX;
 }
+
+int Node::getPrevY(){
+    return prevY;
+}
+
+int Node::getNextX(){
+    return nextX;
+}
+
+int Node::getNextY(){
+    return nextY;
+}
+/*retorna el costo de este nodo*/
+int Node::getC(){return c;}

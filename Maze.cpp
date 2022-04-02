@@ -17,7 +17,7 @@ Maze::~Maze() {
 
 void Maze::generate() {
     arr = new int*[dim];
-    route = new Arbol(dim);
+    route.generate(dim);
     for (int i = 0; i < dim; i++) {
         arr[i] = new int[dim];
         for (int j = 0; j < dim; j++) {
@@ -54,73 +54,75 @@ void Maze::print(){
 
 void Maze::solve(){
     /*Se genera un stack de los nodos por visitar*/
-    StackNode xVisit(dim*dim);
+    Stack xVisit(dim*dim);
     /*Se genera un arbol que contendra los nodos visitados*/
     /*route, representara los nodos visitados;*/
     /*Se ingresa dentro del stack el nodo (0,0) */
-    Node *toAnalizar = new Node(0,0,0,NULL);
-    xVisit.push(toAnalizar);
+    xVisit.push(0,0,0);
     /*Se asume como visitado*/
-    route->addCoor(0,0,0,NULL);
+    route.addCoor(0,0,0,-1,-1);
+    int currX, currY, currC;
     while(!xVisit.isEmpty()){
-        /*Se obtienen las coordendas del nodo tope*/
-        toAnalizar = xVisit.top();
+        currX = xVisit.topX();
+        currY = xVisit.topY();
+        currC = xVisit.topC();
         /*Se esta visitando por lo que se retira del stack*/
         xVisit.pop();
         /*Movimiento hacia la izquierda*/
-        if (toAnalizar->getX() > 0){
+        if (currX > 0){
             /*En caso de ser hacia una PARED el movimiento, sencillamente no se realiza*/
-            if (arr[toAnalizar->getX() - 1][toAnalizar->getY()] != WALL){
+            if (arr[currX - 1][currY] != WALL){
                 /*Considerando que addCoor() es un metodo de tipo booleano se
                 emplea para verificar si se pudo o no ingresar el nuevo nodo
                 y por lo tanto en agregar por visitar o no*/
-                if (route->addCoor(toAnalizar->getX() - 1, toAnalizar->getY(), toAnalizar->getC() + 1, toAnalizar))
+                if (route.addCoor(currX - 1, currY, currC + 1, currX, currY))
                 {
-                    xVisit.push(new Node(toAnalizar->getX() - 1, toAnalizar->getY(), toAnalizar->getC() + 1,toAnalizar));
-                    //cout << (toAnalizar->getX() - 1) << " - " << toAnalizar->getY() << " - " << (toAnalizar->getC() + 1) << " - " << toAnalizar->getX() << " - " << toAnalizar->getY() << "\n";
+                    xVisit.push(currX - 1, currY, currC + 1);
+                    cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
         /*Movimiento hacia la derecha*/
-        if (toAnalizar->getX() < (dim -1))
+        if (currX < (dim -1))
         {
-            if (arr[toAnalizar->getX() + 1][toAnalizar->getY()] != WALL)
+            if (arr[currX + 1][currY] != WALL)
             {
-                if (route->addCoor(toAnalizar->getX() + 1, toAnalizar->getY(), toAnalizar->getC() + 1,toAnalizar))                {
-                    xVisit.push(new Node(toAnalizar->getX() + 1, toAnalizar->getY(), toAnalizar->getC() + 1,NULL));
-                    //cout << (toAnalizar->getX() + 1) << " - " << toAnalizar->getY() << " - " << (toAnalizar->getC() + 1) << " - " << toAnalizar->getX() << " - " << toAnalizar->getY() << "\n";
+                if (route.addCoor(currX + 1, currY, currC + 1, currX, currY))                {
+                    xVisit.push(currX + 1, currY, currC + 1);
+                    cout << (currX + 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
         /*Movimiento hacia arriba*/
-        if (toAnalizar->getY() > 0)
+        if (currY > 0)
         {
-            if (arr[toAnalizar->getX()][toAnalizar->getY() - 1] != WALL)
+            if (arr[currX][currY - 1] != WALL)
             {
-                if (route->addCoor(toAnalizar->getX(), toAnalizar->getY() - 1, toAnalizar->getC() + 1, toAnalizar))
+                if (route.addCoor(currX, currY - 1, currC + 1, currX, currY))
                 {
-                    xVisit.push(new Node(toAnalizar->getX(), toAnalizar->getY() - 1, toAnalizar->getC() + 1, toAnalizar));
-                    //cout << toAnalizar->getX() << " - " << (toAnalizar->getY()-1) << " - " << (toAnalizar->getC() + 1) << " - " << toAnalizar->getX() << " - " << toAnalizar->getY() << "\n";
+                    xVisit.push(currX, currY - 1, currC + 1);
+                    cout << currX << "-" << (currY-1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
         /*Movimiento hacia abajo*/
-        if (toAnalizar->getY() < (dim -1))
+        if (currY < (dim -1))
         {
-            if (arr[toAnalizar->getX()][toAnalizar->getY()+1] != WALL)
+            if (arr[currX][currY+1] != WALL)
             {
-                if (route->addCoor(toAnalizar->getX(), toAnalizar->getY() + 1, toAnalizar->getC() + 1, toAnalizar))
+                if (route.addCoor(currX, currY + 1, currC + 1, currX, currY))
                 {
-                    xVisit.push(new Node(toAnalizar->getX(), toAnalizar->getY() + 1, toAnalizar->getC() + 1, toAnalizar));
-                    //cout << toAnalizar->getX() << " - " << (toAnalizar->getY() + 1) << " - " << (toAnalizar->getC() + 1) << " - " << toAnalizar->getX() << " - " << toAnalizar->getY() << "\n";
+                    xVisit.push(currX, currY + 1, currC + 1);
+                    cout << currX << "-" << (currY + 1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
     }
-    xVisit.~StackNode();
-    if(route->exist(dim-1,dim-1)){
+    cout << "\n";
+    xVisit.~Stack();
+    if(route.isVisited(dim-1,dim-1)){
         cout << "Se encontro un camino :D\n";
-        route->getWay(dim-1,dim-1);
+        route.getWay();
     }else{
         cout << "No se encontro un camino )':\n";
     }
@@ -128,5 +130,5 @@ void Maze::solve(){
 }
 
 void Maze::showRoute(){
-    route->getWay(dim-1,dim-1);
+    route.getWay();
 }

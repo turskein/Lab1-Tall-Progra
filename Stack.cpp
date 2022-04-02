@@ -49,7 +49,7 @@ int Stack::topC(){
     return pila[p+2];
 }
 
-bool Stack::isVoid(){
+bool Stack::isEmpty(){
     return pila[p] == -1;
 }
 

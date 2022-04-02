@@ -17,6 +17,7 @@ Maze::~Maze() {
 
 void Maze::generate() {
     arr = new int*[dim];
+    route.generate(dim);
     for (int i = 0; i < dim; i++) {
         arr[i] = new int[dim];
         for (int j = 0; j < dim; j++) {
@@ -53,77 +54,76 @@ void Maze::print(){
 
 void Maze::solve(){
     /*Se genera un stack de los nodos por visitar*/
-    Stack xRecorrer(dim*dim);
-    /*Se genera un heap que contendra los nodos visitados*/
-    Heap visited(dim);
+    Heap xVisit(dim*dim);
+    /*Se genera un arbol que contendra los nodos visitados*/
+    /*route, representara los nodos visitados;*/
     /*Se ingresa dentro del stack el nodo (0,0) */
-    xRecorrer.push(0,0,0);
+    xVisit.insert(new NodeH(0,0,0,NULL));
     /*Se asume como visitado*/
-    visited.addCoor(0,0,0,0,0);
-    int avisitarX, avisitarY, avisitarC;
-    while(!xRecorrer.isVoid()){
-        /*Se obtienen las coordendas del nodo tope*/
-        avisitarX = xRecorrer.topX(); // Coordenada x
-        avisitarY = xRecorrer.topY(); // Coordenada y
-        avisitarC = xRecorrer.topC(); // Coste hasta la coordenada en que nos encontramos
+    route.addCoor(0,0,0,-1,-1);
+    int currX, currY, currC;
+    NodeH *nodo;
+    while(!xVisit.isEmpty()){
+        nodo = xVisit.pull();
+        currX = nodo->get_i();
+        currY = nodo->get_j();
+        currC = -nodo->getValue();
         /*Se esta visitando por lo que se retira del stack*/
-        xRecorrer.pop();
         /*Movimiento hacia la izquierda*/
-        if (avisitarX > 0){
+        if (currX > 0){
             /*En caso de ser hacia una PARED el movimiento, sencillamente no se realiza*/
-            if (arr[avisitarX - 1][avisitarY] != WALL){
+            if (arr[currX - 1][currY] != WALL){
                 /*Considerando que addCoor() es un metodo de tipo booleano se
                 emplea para verificar si se pudo o no ingresar el nuevo nodo
                 y por lo tanto en agregar por visitar o no*/
-                if (visited.addCoor(avisitarX - 1, avisitarY, avisitarC + 1, avisitarX, avisitarY))
+                if (route.addCoor(currX - 1, currY, currC + 1, currX, currY))
                 {
-                    xRecorrer.push(avisitarX - 1, avisitarY, avisitarC + 1);
-                    //cout << (avisitarX - 1) << " - " << avisitarY << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
+                    xVisit.insert(new NodeH(currX - 1, currY, currC + 1,NULL));
+                    cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
         /*Movimiento hacia la derecha*/
-        if (avisitarX < (dim -1))
+        if (currX < (dim -1))
         {
-            if (arr[avisitarX + 1][avisitarY] != WALL)
+            if (arr[currX + 1][currY] != WALL)
             {
-                if (visited.addCoor(avisitarX + 1, avisitarY, avisitarC + 1, avisitarX, avisitarY))
-                {
-                    xRecorrer.push(avisitarX + 1, avisitarY, avisitarC + 1);
-                    //cout << (avisitarX + 1) << " - " << avisitarY << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
+                if (route.addCoor(currX + 1, currY, currC + 1, currX, currY))                {
+                    xVisit.insert(new NodeH(currX + 1, currY, currC + 1,NULL));
+                    cout << (currX + 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
         /*Movimiento hacia arriba*/
-        if (avisitarY > 0)
+        if (currY > 0)
         {
-            if (arr[avisitarX][avisitarY - 1] != WALL)
+            if (arr[currX][currY - 1] != WALL)
             {
-                if (visited.addCoor(avisitarX, avisitarY - 1, avisitarC + 1, avisitarX, avisitarY))
+                if (route.addCoor(currX, currY - 1, currC + 1, currX, currY))
                 {
-                    xRecorrer.push(avisitarX, avisitarY - 1, avisitarC + 1);
-                    //cout << avisitarX << " - " << (avisitarY-1) << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
+                    xVisit.insert(new NodeH(currX, currY - 1, currC + 1,NULL));
+                    cout << currX << "-" << (currY-1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
         /*Movimiento hacia abajo*/
-        if (avisitarY < (dim -1))
+        if (currY < (dim -1))
         {
-            if (arr[avisitarX][avisitarY+1] != WALL)
+            if (arr[currX][currY+1] != WALL)
             {
-                if (visited.addCoor(avisitarX, avisitarY + 1, avisitarC + 1, avisitarX, avisitarY))
+                if (route.addCoor(currX, currY + 1, currC + 1, currX, currY))
                 {
-                    xRecorrer.push(avisitarX, avisitarY + 1, avisitarC + 1);
-                    //cout << avisitarX << " - " << (avisitarY + 1) << " - " << (avisitarC + 1) << " - " << avisitarX << " - " << avisitarY << "\n";
+                    xVisit.insert(new NodeH(currX, currY + 1, currC + 1,NULL));
+                    cout << currX << "-" << (currY + 1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
     }
-    xRecorrer.~Stack();
-    route = visited;
-    if(visited.exist(dim-1,dim-1)){
+    cout << "\n";
+    xVisit.~Heap();
+    if(route.isVisited(dim-1,dim-1)){
         cout << "Se encontro un camino :D\n";
-        visited.getWay(dim-1,dim-1);
+        route.getWay();
     }else{
         cout << "No se encontro un camino )':\n";
     }
@@ -131,5 +131,5 @@ void Maze::solve(){
 }
 
 void Maze::showRoute(){
-    route.getWay(dim-1,dim-1);
+    route.getWay();
 }

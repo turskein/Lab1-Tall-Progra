@@ -1,14 +1,25 @@
-test_Heap_1: Node.o Heap.o test_Heap_1.cpp
-	g++ Node.o Heap.o test_Heap_1.cpp -o test_Heap_1
+EVERYDOTO = *.o
+
+test_Heap_1: Node.o NodeH.o Heap.o Arbol.o Maze.o test_Heap_1.cpp
+	g++ Node.o NodeH.o Heap.o Arbol.o Maze.o test_Maze_1.cpp -o a
+
+Maze.o: Maze.h Maze.cpp
+	g++ -c Maze.cpp
+
+Arbol.o: Arbol.h Arbol.cpp
+	g++ -c Arbol.cpp
 	
-Heap.o: Node.h Heap.cpp Heap.h
+Heap.o: Heap.cpp Heap.h
 	g++ -c Heap.cpp
 
 Node.o: Node.cpp Node.h
 	g++ -c Node.cpp
 
-clean:
-	rm -f *.o test_Heap_1
+NodeH.o: NodeH.cpp NodeH.h
+	g++ -c NodeH.cpp
 
-run_test: test_Heap_1
-	./test_Heap_1
+clean:
+	rm $(EVERYDOTO)
+
+run:
+	./a

@@ -15,6 +15,6 @@ public:
     int topX();
     int topY();
     int topC();
-    bool isVoid();
+    bool isEmpty();
     void show();
 };

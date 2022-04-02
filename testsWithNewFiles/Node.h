@@ -1,43 +1,55 @@
+#ifndef Nodo_
+#define Nodo_
 #include <iostream>
 
-using namespace std;
+#define RIGHT   0
+#define LEFT    1
+#define UP      2
+#define DOWN    3
+#define SAMEX   1
+#define SAMEY   2
+#define SAME    3
+#define DIFF    0
+#define OPEN    1
+#define CLOSE   0
 
-// needs an explanation of the class, please always comment your code
+/*Representacion abstracta de dos coordenadas
+en un nodo*/
 class Node {
-public:
-    Node();
-    ~Node();
-    Node(Node* node);
-    Node(int i, int j, int value, Node* previous);
-
-    // NOT best practice to have a getter for the private member!
-    int get_i();
-    int get_j();
-    Node *getPrevious();
-    Node *getNext();
-    int getValue();
-    int getDepth();
-    
-    // NOT best practice to have a getter for the private member!
-    void setPrevious(Node *previous);
-    void setNext(Node *previous);
-    void setDepth(int depth);
-    
-    // main methods
-    int isRoot();
-    string getPathPrevious();
-    string getPathNext();
-    void print();
-
 private:
-    // particular variables of this problem
-    int i; // row
-    int j; // column
-    int value; // a value representing a cost for choosing this node
-    int depth; // the depth of this node in the tree
+    int c, prevX, prevY, nextX, nextY;
+    bool visited;
+public:
+    //Constructores
+    Node();
+    Node(int c, int prevX, int prevY);
+    Node(int c, int prevX, int prevY, int nextX, int nextY);
+    ~Node();
 
-    // structural variables: meaning relationships between nodes
-    Node *previous; // the previous node in the path
-    Node *next; // the next node in the path
-};  // end class Node
+    //Getters
+    int getC();
+    int getPrevX();
+    int getPrevY();
+    int getNextX();
+    int getNextY();
+    
+    //Cuestionadores
+    bool isVisited();
+    /*
+    bool canGoNorth();
+    bool canGoSouth();
+    bool canGoEast();
+    bool canGoWest
+    bool canGoNorth();
+    bool canGoNorth();
+    */
 
+    void setPrev(int prevX, int prevY);
+    //Setters
+    void setNext(int nextX, int nextY);
+    void setVisited();
+    void setC(int newc);
+    void betterPrev(int theC, int prevX, int prevY);
+};
+
+#endif

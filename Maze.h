@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Arbol.h"
-#include "StackNode.h"
+#include "Stack.h"
 
 
 using namespace std;
@@ -25,5 +25,5 @@ private:
     int dim;
     int **arr;
     int void_percentage;
-    Arbol *route;
+    Arbol route;
 };
