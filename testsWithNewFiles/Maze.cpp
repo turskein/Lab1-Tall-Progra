@@ -76,9 +76,9 @@ void Maze::solve(){
                 /*Considerando que addCoor() es un metodo de tipo booleano se
                 emplea para verificar si se pudo o no ingresar el nuevo nodo
                 y por lo tanto en agregar por visitar o no*/
-                if (route.addCoor(currX - 1, currY, currC + 1, currX, currY))
+                if (route.addCoor(currX - 1, currY, -(currC + 1), currX, currY))
                 {
-                    xVisit.insert(new NodeH(currX - 1, currY, currC + 1,NULL));
+                    xVisit.insert(new NodeH(currX - 1, currY,- (currC + 1),NULL));
                     cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
@@ -88,8 +88,8 @@ void Maze::solve(){
         {
             if (arr[currX + 1][currY] != WALL)
             {
-                if (route.addCoor(currX + 1, currY, currC + 1, currX, currY))                {
-                    xVisit.insert(new NodeH(currX + 1, currY, currC + 1,NULL));
+                if (route.addCoor(currX + 1, currY, -currC, currX, currY))                {
+                    xVisit.insert(new NodeH(currX + 1, currY, -currC,NULL));
                     cout << (currX + 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
@@ -99,9 +99,9 @@ void Maze::solve(){
         {
             if (arr[currX][currY - 1] != WALL)
             {
-                if (route.addCoor(currX, currY - 1, currC + 1, currX, currY))
+                if (route.addCoor(currX, currY - 1, -(currC + 1), currX, currY))
                 {
-                    xVisit.insert(new NodeH(currX, currY - 1, currC + 1,NULL));
+                    xVisit.insert(new NodeH(currX, currY - 1, -(currC + 1),NULL));
                     cout << currX << "-" << (currY-1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
@@ -111,9 +111,9 @@ void Maze::solve(){
         {
             if (arr[currX][currY+1] != WALL)
             {
-                if (route.addCoor(currX, currY + 1, currC + 1, currX, currY))
+                if (route.addCoor(currX, currY + 1, -currC, currX, currY))
                 {
-                    xVisit.insert(new NodeH(currX, currY + 1, currC + 1,NULL));
+                    xVisit.insert(new NodeH(currX, currY + 1, -currC,NULL));
                     cout << currX << "-" << (currY + 1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
