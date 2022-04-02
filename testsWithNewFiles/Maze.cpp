@@ -79,7 +79,7 @@ void Maze::solve(){
                 if (route.addCoor(currX - 1, currY, -(currC + 1), currX, currY))
                 {
                     xVisit.insert(new NodeH(currX - 1, currY,- (currC + 1),NULL));
-                    cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
+                    //cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
@@ -90,7 +90,7 @@ void Maze::solve(){
             {
                 if (route.addCoor(currX + 1, currY, -currC, currX, currY))                {
                     xVisit.insert(new NodeH(currX + 1, currY, -currC,NULL));
-                    cout << (currX + 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
+                    //cout << (currX + 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
@@ -102,7 +102,7 @@ void Maze::solve(){
                 if (route.addCoor(currX, currY - 1, -(currC + 1), currX, currY))
                 {
                     xVisit.insert(new NodeH(currX, currY - 1, -(currC + 1),NULL));
-                    cout << currX << "-" << (currY-1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
+                    //cout << currX << "-" << (currY-1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
@@ -114,22 +114,17 @@ void Maze::solve(){
                 if (route.addCoor(currX, currY + 1, -currC, currX, currY))
                 {
                     xVisit.insert(new NodeH(currX, currY + 1, -currC,NULL));
-                    cout << currX << "-" << (currY + 1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
+                    //cout << currX << "-" << (currY + 1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
                 }
             }
         }
     }
     cout << "\n";
     xVisit.~Heap();
-    if(route.isVisited(dim-1,dim-1)){
-        cout << "Se encontro un camino :D\n";
-        route.getWay();
-    }else{
-        cout << "No se encontro un camino )':\n";
-    }
     return;
 }
 
+/*Muestra la ruta relacionada al laberinto*/
 void Maze::showRoute(){
-    route.getWay();
+    route.getWay(arr);
 }

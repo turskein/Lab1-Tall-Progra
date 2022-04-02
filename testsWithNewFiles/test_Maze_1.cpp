@@ -13,7 +13,7 @@ int main() {
     k = 1;
     while(k){
         cout << "--------------\n";
-        cout << "[1] Print maze\n[2] Solve Maze\n[3] Redimension\n[0] Exit()\nEnter some option: ";
+        cout << "[1] Print maze\n[2] Solve Maze\n[3] Get Route\n[0] Exit()\nEnter some option: ";
         cin >> option;
         cout << "\n";
         switch (option)
@@ -35,12 +35,7 @@ int main() {
             cout << "\n";
             break;
         case 3:
-            cout << "Enter new dimensions: ";
-            cin >> n;
-            cout << "Enter new void percentage: ";
-            cin >> perc;
-            m = Maze(n, perc);
-            break;
+            m.showRoute();
         }
     }
     return 0;

@@ -17,8 +17,11 @@
 en un nodo*/
 class Node {
 private:
-    int c, prevX, prevY, nextX, nextY;
-    bool visited;
+    int c; //costo del nodo
+    int prevX; // Coordenada x del nodo anterior a este
+    int prevY; // Coordenada y del nodo anterior a este
+    int state;  // Se refiere a si es parte del camino o no
+    bool visited; // Fue visitado o no, 1 o 0 respectivamente
 public:
     //Constructores
     Node();
@@ -30,8 +33,7 @@ public:
     int getC();
     int getPrevX();
     int getPrevY();
-    int getNextX();
-    int getNextY();
+    int getState();
     
     //Cuestionadores
     bool isVisited();
@@ -44,9 +46,9 @@ public:
     bool canGoNorth();
     */
 
-    void setPrev(int prevX, int prevY);
     //Setters
-    void setNext(int nextX, int nextY);
+    void setPrev(int prevX, int prevY);
+    void setState(int newState);
     void setVisited();
     void setC(int newc);
     void betterPrev(int theC, int prevX, int prevY);

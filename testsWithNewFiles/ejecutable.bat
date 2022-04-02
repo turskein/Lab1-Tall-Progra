@@ -1,1 +1,1 @@
-DEL /F /A a.exe & DEL /F /A Heap.o & DEL /F /A Stack.o & DEL /F /A Node.o & DEL /F /A Maze.o & g++ -c Node.cpp & g++ -c Stack.cpp & g++ -c Heap.cpp & g++ -c Maze.cpp & g++ Node.o Stack.o Heap.o Maze.o test_maze_1.cpp -o a.exe && a
+DEL /F /A a.exe & DEL /F /A Heap.o & DEL /F /A Arbol.o & DEL /F /A NodeH.o & DEL /F /A Node.o & DEL /F /A Maze.o & g++ -c Node.cpp & g++ -c NodeH.cpp & g++ -c Heap.cpp & g++ -c Arbol.cpp & g++ -c Maze.cpp & g++ Node.o NodeH.o Arbol.o Heap.o Maze.o test_Maze_1.cpp -o a.exe && a
