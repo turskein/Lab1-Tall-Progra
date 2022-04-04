@@ -31,9 +31,9 @@ private:
     int i; // row
     int j; // column
     int value; // a value representing a cost for choosing this NodeH
-    int depth; // the depth of this NodeH in the tree
+    //int depth; // the depth of this NodeH in the tree
 
     // structural variables: meaning relationships between NodeHs
-    NodeH *previous; // the previous NodeH in the path
+    //NodeH *previous; // the previous NodeH in the path
 };  // end class NodeH
 

@@ -48,7 +48,7 @@ void Maze::print(){
             if(arr[j][i] == EMPTY){
                 cout << "O";
             }else if(arr[j][i] == WALL){
-                cout << "X";
+                cout << RED <<"X"<< RESET;
             }
             else if (arr[j][i] == IN_DOOR)
             {
@@ -63,7 +63,7 @@ void Maze::print(){
     }
 }
 
-void Maze::goUp(Heap *xVisit, int x, int y, int c)
+void Maze::goUp(Container *xVisit, int x, int y, int c)
 {
     
     if(y > 0){
@@ -75,7 +75,7 @@ void Maze::goUp(Heap *xVisit, int x, int y, int c)
     }
 }
 
-void Maze::goRight(Heap *xVisit, int x, int y, int c)
+void Maze::goRight(Container *xVisit, int x, int y, int c)
 {
     if (x < dim-1)
     {
@@ -89,7 +89,7 @@ void Maze::goRight(Heap *xVisit, int x, int y, int c)
     }
 }
 
-void Maze::goDown(Heap *xVisit, int x, int y, int c)
+void Maze::goDown(Container *xVisit, int x, int y, int c)
 {
     if (y < dim-1)
     {
@@ -106,7 +106,7 @@ void Maze::goDown(Heap *xVisit, int x, int y, int c)
     }
 }
 
-void Maze::goLeft(Heap *xVisit, int x, int y, int c)
+void Maze::goLeft(Container *xVisit, int x, int y, int c)
 {
     if (x > 0)
     {
@@ -120,7 +120,7 @@ void Maze::goLeft(Heap *xVisit, int x, int y, int c)
     }
 }
 
-bool Maze::analyseNode(Heap *xVisit, int x, int y, int c)
+bool Maze::analyseNode(Container *xVisit, int x, int y, int c)
 {
     if (x == (dim - 1) && y == (dim - 1)) return true;
     
@@ -133,11 +133,11 @@ bool Maze::analyseNode(Heap *xVisit, int x, int y, int c)
 }
 
 bool Maze::solve(){
-    /*Se genera un stack de los nodos por visitar*/
-    Heap xVisit(dim*dim);
+    /*Se genera un container de los nodos por visitar*/
+    Container xVisit(dim*dim);
     /*Se genera un arbol que contendra los nodos visitados*/
     /*route, representara los nodos visitados;*/
-    /*Se ingresa dentro del stack el nodo (0,0) */
+    /*Se ingresa dentro del container el nodo (0,0) */
     xVisit.insert(new NodeH(0,0,0,NULL));
     /*Se asume como visitado*/
     route.addCoor(0,0,0,-1,-1);
@@ -150,7 +150,7 @@ bool Maze::solve(){
         currC = nodo->getValue();
         if(analyseNode(&xVisit, currX,currY,currC)) return true;
     }
-    //xVisit.~Heap();
+    //xVisit.~Container();
     return false;
 }
 
