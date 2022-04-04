@@ -63,6 +63,75 @@ void Maze::print(){
     }
 }
 
+void Maze::goUp(Heap *xVisit, int x, int y, int c)
+{
+    
+    if(y > 0){
+        if(arr[x][y-1] != WALL){
+            if(route.addCoor(x,y-1,c+1,x,y)){
+                xVisit->insert(new NodeH(x, y - 1, -(c+1),NULL));
+            }
+        }
+    }
+}
+
+void Maze::goRight(Heap *xVisit, int x, int y, int c)
+{
+    if (x < dim-1)
+    {
+        if (arr[x+1][y] != WALL)
+        {
+            if (route.addCoor(x+1, y, c, x, y))
+            {
+                xVisit->insert(new NodeH(x+1, y, -c, NULL));
+            }
+        }
+    }
+}
+
+void Maze::goDown(Heap *xVisit, int x, int y, int c)
+{
+    if (y < dim-1)
+    {
+        
+        if (arr[x][y +1] != WALL)
+        {
+            
+            if (route.addCoor(x, y +1, c, x, y))
+            {
+                
+                xVisit->insert(new NodeH(x, y +1, -c, NULL));
+            }
+        }
+    }
+}
+
+void Maze::goLeft(Heap *xVisit, int x, int y, int c)
+{
+    if (x > 0)
+    {
+        if (arr[x-1][y] != WALL)
+        {
+            if (route.addCoor(x-1, y, c + 1, x, y))
+            {
+                xVisit->insert(new NodeH(x-1, y, -c - 1, NULL));
+            }
+        }
+    }
+}
+
+bool Maze::analyseNode(Heap *xVisit, int x, int y, int c)
+{
+    if (x == (dim - 1) && y == (dim - 1)) return true;
+    
+    goDown(xVisit,x,y,c);
+    goUp(xVisit, x,y,c);
+    goRight(xVisit, x,y,c);
+    goLeft(xVisit, x,y,c);
+    
+    return false;
+}
+
 bool Maze::solve(){
     /*Se genera un stack de los nodos por visitar*/
     Heap xVisit(dim*dim);
@@ -78,62 +147,8 @@ bool Maze::solve(){
         nodo = xVisit.pull();
         currX = nodo->get_i();
         currY = nodo->get_j();
-        currC = -nodo->getValue();
-        /*Se esta visitando por lo que se retira del stack*/
-        /*Movimiento hacia la izquierda*/
-        if (currX == dim-1 && currY == dim -1) {
-            return true;
-            };
-            if (currX > 0)
-            {
-                /*En caso de ser hacia una PARED el movimiento, sencillamente no se realiza*/
-                if (arr[currX - 1][currY] != WALL)
-                {
-                    /*Considerando que addCoor() es un metodo de tipo booleano se
-                    emplea para verificar si se pudo o no ingresar el nuevo nodo
-                    y por lo tanto en agregar por visitar o no*/
-                    if (route.addCoor(currX - 1, currY, -(currC + 1), currX, currY))
-                    {
-                        xVisit.insert(new NodeH(currX - 1, currY, -(currC + 1), NULL));
-                        // cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
-                    }
-                }
-            }
-        /*Movimiento hacia la derecha*/
-        if (currX < (dim -1))
-        {
-            if (arr[currX + 1][currY] != WALL)
-            {
-                if (route.addCoor(currX + 1, currY, -currC, currX, currY))                {
-                    xVisit.insert(new NodeH(currX + 1, currY, -currC,NULL));
-                    //cout << (currX + 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
-                }
-            }
-        }
-        /*Movimiento hacia arriba*/
-        if (currY > 0)
-        {
-            if (arr[currX][currY - 1] != WALL)
-            {
-                if (route.addCoor(currX, currY - 1, -(currC + 1), currX, currY))
-                {
-                    xVisit.insert(new NodeH(currX, currY - 1, -(currC + 1),NULL));
-                    //cout << currX << "-" << (currY-1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
-                }
-            }
-        }
-        /*Movimiento hacia abajo*/
-        if (currY < (dim -1))
-        {
-            if (arr[currX][currY+1] != WALL)
-            {
-                if (route.addCoor(currX, currY + 1, -currC, currX, currY))
-                {
-                    xVisit.insert(new NodeH(currX, currY + 1, -currC,NULL));
-                    //cout << currX << "-" << (currY + 1) << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
-                }
-            }
-        }
+        currC = nodo->getValue();
+        if(analyseNode(&xVisit, currX,currY,currC)) return true;
     }
     //xVisit.~Heap();
     return false;

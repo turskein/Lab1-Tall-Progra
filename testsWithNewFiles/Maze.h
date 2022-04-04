@@ -21,8 +21,13 @@ public:
     bool solve(); // solve best path
     void generate(); // generate random maze
     void showRoute();
-private:
-    int dim;
+    bool analyseNode(Heap *xVisit, int x, int y, int c);
+    void goDown(Heap *xVisit, int x, int y, int c);
+    void goRight(Heap *xVisit, int x, int y, int c);
+    void goUp(Heap *xVisit, int x, int y, int c);
+    void goLeft(Heap *xVisit, int x, int y, int c);
+
+private : int dim;
     int **arr;
     int void_percentage;
     Arbol route;
