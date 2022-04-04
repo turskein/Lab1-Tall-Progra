@@ -30,6 +30,14 @@ bool Node::isVisited(){
     return this->visited;
 }
 
+void Node::reset(){
+    c = -1;
+    state = 0;
+    prevX = -1;
+    prevY = -1;
+    visited = false;
+};
+
 /*Setea las coordenadas del nodo anterior a este*/
 void Node::setPrev(int prevX, int prevY){
     this->prevX = prevX;

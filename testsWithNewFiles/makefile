@@ -1,7 +1,19 @@
 EVERYDOTO = *.o
 
-test_Heap_1: Node.o NodeH.o Heap.o Arbol.o Maze.o test_Heap_1.cpp
-	g++ Node.o NodeH.o Heap.o Arbol.o Maze.o test_Maze_1.cpp -o a
+main: Node.o NodeH.o Heap.o Arbol.o Maze.o main.cpp
+	g++ Node.o NodeH.o Heap.o Arbol.o Maze.o main.cpp -o main
+
+maze: Node.o NodeH.o Heap.o Arbol.o Maze.o test_Maze_1.cpp
+	g++ Node.o NodeH.o Heap.o Arbol.o Maze.o test_Maze_1.cpp -o maze
+
+arbol: Node.o Arbol.o test_Arbol_1.cpp
+	g++ Node.o Arbol.o test_Arbol_1.cpp -o arbol
+
+heap: Heap.o NodeH.o test_Heap_1.cpp
+	g++ Heap.o NodeH.o test_Heap_1.cpp -o heap
+
+node: Node.o
+	g++ Node.o test_Node_1.cpp -o node
 
 Maze.o: Maze.h Maze.cpp
 	g++ -c Maze.cpp
@@ -21,5 +33,14 @@ NodeH.o: NodeH.cpp NodeH.h
 clean:
 	rm $(EVERYDOTO)
 
-run:
-	./a
+runmain:
+	./main
+
+runheap:
+	./heap
+
+runnode:
+	./node
+
+runheap:
+	./arbol

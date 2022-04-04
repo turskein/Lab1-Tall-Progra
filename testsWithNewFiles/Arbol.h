@@ -18,7 +18,7 @@ public:
     Arbol(); //constructor vacio
     Arbol(int dim); // contructor relleno
     ~Arbol(); // destructor
-
+    void resetNode(int i, int j);
     void generate(int dim);
     bool addCoor(int x, int y, int c, int prevX, int prevY);
     bool isVisited(int x, int y);

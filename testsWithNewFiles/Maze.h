@@ -18,7 +18,7 @@ public:
     Maze(int dim, int p);
     ~Maze();
     void print();
-    void solve(); // solve best path
+    bool solve(); // solve best path
     void generate(); // generate random maze
     void showRoute();
 private:

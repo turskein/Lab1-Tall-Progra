@@ -33,8 +33,7 @@ Arbol::~Arbol(){
 
 /*Se agrega una coordenada al Arbol, en caso de existir un par ordenado,
 identico no sera posible agregarlo.
-
-Se entiende que la busqueda es O(n)*/
+*/
 bool Arbol::addCoor(int x, int y, int c, int prevX, int prevY){
     if(matriz[x][y].isVisited()){
         //matriz[x][y].betterPrev(c,prevY,prevY);
@@ -51,15 +50,21 @@ bool Arbol::isVisited(int x, int y){
     return matriz[x][y].isVisited();
 }
 
+/*Setea los valores de un nodo en particular como si fuera recién creado*/
+void Arbol::resetNode(int i, int j){
+    matriz[i][j].reset();
+};
+
 /*Recorre las matriz completa mostrando imformacion referente a cada nodo*/
 void Arbol::show(){
     int j = 0;
     for(int i = 0; i < dim; i++){
         for(j = 0; j < dim; j++){
-            cout << "x=" << i << "-"
-                 << "y=" << j << "-"
-                 << "Px=" << matriz[i][j].getPrevY() << "-"
-                 << "Py=" << matriz[i][j].getPrevY() << " ; ";
+            cout << "x =" << i << "-"
+                 << "y =" << j << "-"
+                 << "c =" << matriz[i][j].getC()
+                 << "Px =" << matriz[i][j].getPrevY() << "-"
+                 << "Py =" << matriz[i][j].getPrevY() << " ; ";
         }
         cout << "\n";
     }

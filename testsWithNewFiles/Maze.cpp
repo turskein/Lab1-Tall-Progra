@@ -5,6 +5,7 @@ Maze::Maze(int dim, int p) {
         srand(time(NULL)); // set seed for random number generator
     Maze::dim = dim;
     Maze::void_percentage=p;
+    Maze::arr = nullptr;
     Maze::generate();
 }
 
@@ -16,17 +17,27 @@ Maze::~Maze() {
 }
 
 void Maze::generate() {
-    arr = new int*[dim];
-    route.generate(dim);
-    for (int i = 0; i < dim; i++) {
-        arr[i] = new int[dim];
-        for (int j = 0; j < dim; j++) {
-            arr[i][j] = rand() % 100 < void_percentage ? EMPTY : WALL;
+    if(arr == NULL){
+        arr = new int *[dim];
+        route.generate(dim);
+        for (int i = 0; i < dim; i++)
+        {
+            arr[i] = new int[dim];
+            for (int j = 0; j < dim; j++)
+            {
+                arr[i][j] = rand() % 100 < void_percentage ? EMPTY : WALL;
+            }
+        }
+    }else{
+        for (int i = 0; i < dim; i++)
+        {
+            for (int j = 0; j < dim; j++)
+            {
+                route.resetNode(i,j);
+                arr[i][j] = rand() % 100 < void_percentage ? EMPTY : WALL;
+            }
         }
     }
-
-    // set the entrance and exit
-    
     arr[0][0] = IN_DOOR;
     arr[dim-1][dim-1] = OUT_DOOR;
 }
@@ -52,7 +63,7 @@ void Maze::print(){
     }
 }
 
-void Maze::solve(){
+bool Maze::solve(){
     /*Se genera un stack de los nodos por visitar*/
     Heap xVisit(dim*dim);
     /*Se genera un arbol que contendra los nodos visitados*/
@@ -70,19 +81,24 @@ void Maze::solve(){
         currC = -nodo->getValue();
         /*Se esta visitando por lo que se retira del stack*/
         /*Movimiento hacia la izquierda*/
-        if (currX > 0){
-            /*En caso de ser hacia una PARED el movimiento, sencillamente no se realiza*/
-            if (arr[currX - 1][currY] != WALL){
-                /*Considerando que addCoor() es un metodo de tipo booleano se
-                emplea para verificar si se pudo o no ingresar el nuevo nodo
-                y por lo tanto en agregar por visitar o no*/
-                if (route.addCoor(currX - 1, currY, -(currC + 1), currX, currY))
+        if (currX == dim-1 && currY == dim -1) {
+            return true;
+            };
+            if (currX > 0)
+            {
+                /*En caso de ser hacia una PARED el movimiento, sencillamente no se realiza*/
+                if (arr[currX - 1][currY] != WALL)
                 {
-                    xVisit.insert(new NodeH(currX - 1, currY,- (currC + 1),NULL));
-                    //cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
+                    /*Considerando que addCoor() es un metodo de tipo booleano se
+                    emplea para verificar si se pudo o no ingresar el nuevo nodo
+                    y por lo tanto en agregar por visitar o no*/
+                    if (route.addCoor(currX - 1, currY, -(currC + 1), currX, currY))
+                    {
+                        xVisit.insert(new NodeH(currX - 1, currY, -(currC + 1), NULL));
+                        // cout << (currX - 1) << "-" << currY << "-" << (currC + 1) << "-" << currX << "-" << currY << ";";
+                    }
                 }
             }
-        }
         /*Movimiento hacia la derecha*/
         if (currX < (dim -1))
         {
@@ -119,9 +135,8 @@ void Maze::solve(){
             }
         }
     }
-    cout << "\n";
-    xVisit.~Heap();
-    return;
+    //xVisit.~Heap();
+    return false;
 }
 
 /*Muestra la ruta relacionada al laberinto*/

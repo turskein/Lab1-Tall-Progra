@@ -1,0 +1,1 @@
+DEL /F /A a.exe & DEL /F /A Heap.o & DEL /F /A Arbol.o & DEL /F /A NodeH.o & DEL /F /A Node.o & DEL /F /A Maze.o 

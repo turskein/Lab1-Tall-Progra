@@ -2,6 +2,8 @@
 #define Nodo_
 #include <iostream>
 
+using namespace std;
+
 #define RIGHT   0
 #define LEFT    1
 #define UP      2
@@ -26,7 +28,6 @@ public:
     //Constructores
     Node();
     Node(int c, int prevX, int prevY);
-    Node(int c, int prevX, int prevY, int nextX, int nextY);
     ~Node();
 
     //Getters
@@ -47,11 +48,11 @@ public:
     */
 
     //Setters
+    void reset();
     void setPrev(int prevX, int prevY);
     void setState(int newState);
     void setVisited();
     void setC(int newc);
-    void betterPrev(int theC, int prevX, int prevY);
 };
 
 #endif

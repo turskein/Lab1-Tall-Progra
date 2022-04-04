@@ -6,7 +6,7 @@ int main() {
     int n=20;
     srand(time(NULL));
     Heap h(n);
-}
+    
     // inserting random numbers
     for(int i = 0; i < n-2; i++) {
         int val=rand()%n;

@@ -1,6 +1,6 @@
 #include "Maze.h"
 
-/*Constructor de */
+/*Constructor del laberinto*/
 Maze::Maze(int dim, int p) {
         srand(time(NULL)); // set seed for random number generator
     Maze::dim = dim;
@@ -8,6 +8,7 @@ Maze::Maze(int dim, int p) {
     Maze::generate();
 }
 
+/*Destructor del laberinto*/
 Maze::~Maze() {
     for (int i = 0; i < dim; i++) {
         delete[] arr[i];
@@ -15,9 +16,14 @@ Maze::~Maze() {
     delete[] arr;
 }
 
+/*Generador del laberinto*/
 void Maze::generate() {
-    arr = new int*[dim];
-    route.generate(dim);
+    if(arr){
+        arr = new int *[dim];
+        route.generate(dim);
+    }
+    
+    
     for (int i = 0; i < dim; i++) {
         arr[i] = new int[dim];
         for (int j = 0; j < dim; j++) {

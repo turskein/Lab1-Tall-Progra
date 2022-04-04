@@ -1,17 +1,13 @@
 #include "Maze.h"
 #include <ctime>
 
-int main() {
+int main(){
     unsigned t0, t1;
-    int n, option, k, perc;
     double time;
-    cout<< "Enter one number that will be distance of the maze: ";
-    cin >> n;
-    cout << "Enter void percentage of the maze: ";
-    cin >> perc;
-    Maze m(n, perc);
-    k = 1;
-    while(k){
+    int k = 1, option;
+    Maze m(100,85);
+    while (k)
+    {
         cout << "--------------\n";
         cout << "[1] Print maze\n[2] Solve Maze\n[3] Get Route\n[0] Exit()\nEnter some option: ";
         cin >> option;
@@ -38,5 +34,6 @@ int main() {
             m.showRoute();
         }
     }
-    return 0;
 }
+
+
