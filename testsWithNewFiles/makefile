@@ -36,14 +36,14 @@ clean:
 runmaze: maze
 	./maze
 
-runmain: main
+run: main
 	./main
 
-runContainer: container
+runcontainer: container
 	./container
 
 runnode: node
 	./node
 
-runheap: arbol
+runarbol: arbol
 	./arbol

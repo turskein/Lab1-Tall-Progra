@@ -17,7 +17,7 @@ int main(){
     bool d;
     double time, te = 0, tn = 0;
 
-    Maze m(1000, 80);
+    Maze m(1000, 90);
     double acum = 0;
     for (int i = 0; i < 100; i++)
     {

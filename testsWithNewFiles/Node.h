@@ -25,33 +25,34 @@ private:
     int state;  // Se refiere a si es parte del camino o no
     bool visited; // Fue visitado o no, 1 o 0 respectivamente
 public:
-    //Constructores
+    //Constructor con valores vacios
     Node();
+    // Constructor con c costo del nodo, prevX coordenada x de nodo anterior y prevY coordenada y del nodo anterior
     Node(int c, int prevX, int prevY);
+    //Destructor del nodo
     ~Node();
 
-    //Getters
+    //getter costo
     int getC();
+    // getter coordenada x del previo
     int getPrevX();
+    // getter coordenada y del previo
     int getPrevY();
+    // getter estado del nodo
     int getState();
     
-    //Cuestionadores
+    //Cuestiona si el nodo ha sido visitado o no
     bool isVisited();
-    /*
-    bool canGoNorth();
-    bool canGoSouth();
-    bool canGoEast();
-    bool canGoWest
-    bool canGoNorth();
-    bool canGoNorth();
-    */
 
-    //Setters
+    //Setea los valores del nodo como si fuera nuevo
     void reset();
+    // Setea las coordenadas del nodo anterior
     void setPrev(int prevX, int prevY);
+    // setea el estado del nodo
     void setState(int newState);
+    // setea como visitado el nodo
     void setVisited();
+    // Setea el costo del nodo
     void setC(int newc);
 };
 

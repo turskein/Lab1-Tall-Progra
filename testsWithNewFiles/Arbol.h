@@ -7,9 +7,9 @@ using namespace std;
 #define RED "\033[31m"
 #define RESET "\033[0m"
 
-/*Matriz que expresa el estado en el que se encuentra,
-el estado en el que se encuentra cada nodo, si hay sido
-recorrido o no y, ademas cuales son sus nodos anteriores*/
+/*Matriz que expresa el estado en el que se encuentra, 
+cada nodo, es decir, si hay sido recorrido o no y, 
+ademas cuales son sus nodos anteriores*/
 class Arbol{
 private:
     int dim; //tamanio de la matriz

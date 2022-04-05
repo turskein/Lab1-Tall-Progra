@@ -18,14 +18,17 @@ public:
     void insert(NodeH *NodeH);
     /*Retirar el elemento de la cima*/
     NodeH* pull();
+    /*Obtiene el valor del nodo superior*/
     int peek();
+    /*Consigue el tamanio del container*/
     int getSize();
+    /*muestra en pantalla como se encuentra el container*/
     void print();
 private:
-    NodeH *arr;
-    int size;
-    int count;
-    void swap(int i, int j);
-    void bubbleUp();
-    void bubbleDown();
+    NodeH *arr; // array que contendra todos los nodos
+    int size; // tamanio del arreglo
+    int count; // contador de elementos
+    void swap(int i, int j); // realizador de intercambios dentro del contenedor entre dos nodos en particular
+    void bubbleUp(); // Desplaza de hacia arriba datos en particular dentro del arbol
+    void bubbleDown(); // Desplaza de hacia abajo datos en particular dentro del arbol
 };

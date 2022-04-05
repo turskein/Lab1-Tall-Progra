@@ -21,15 +21,17 @@ Node::Node(int c, int prevX, int prevY){
     Node::visited = false;
 }
 
-/*Destructor*/
+//Destructor del nodo
 Node::~Node(){
 }
 
-/*Retorna si el nodo esta visitado o no*/
-bool Node::isVisited(){
+//Cuestiona si el nodo ha sido visitado o no
+bool Node::isVisited()
+{
     return this->visited;
 }
 
+// Setea los valores del nodo como si fuera nuevo
 void Node::reset(){
     c = -1;
     state = 0;
@@ -38,42 +40,46 @@ void Node::reset(){
     visited = false;
 };
 
-/*Setea las coordenadas del nodo anterior a este*/
-void Node::setPrev(int prevX, int prevY){
+
+//Setea las coordenadas del nodo anterior
+void Node::setPrev(int prevX, int prevY)
+{
     this->prevX = prevX;
     this->prevY = prevY;
 }
 
-/*Setea el estado de este*/
+// setea el estado del nodo
 void Node::setState(int newState){
     state = newState;
 };
 
-/*Setea el costo de este nodo*/
+// Setea el costo del nodo
 void Node::setC(int newc){
     c = newc;
 }
 
-/*Setea true visited*/
-void Node::setVisited(){
+//setea como visitado el nodo 
+void Node::setVisited()
+{
     this->visited = true;
 }
 
-/*Retorna el estado del nodo, es decir, si pertenece o no al camino.
-Solo aparecera como parte del camino luego de emplear getWay en la 
-ruta del maze*/
+//getter estado del nodo
 int Node::getState(){
     return state;
 }
-/*Retorna la coordenada x del nodo que precede a este*/
+// getter coordenada x del previo
 int Node::getPrevX(){
     return prevX;
 }
 
-/*Retorna la coordenada y del nodo que precede a este*/
+// getter coordenada y del previo
 int Node::getPrevY(){
     return prevY;
 }
 
-/*retorna el costo de este nodo*/
-int Node::getC(){return c;}
+// getter costo
+
+int Node::getC(){
+    return c;
+}
