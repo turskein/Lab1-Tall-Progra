@@ -1,1 +1,0 @@
-DEL /F /A a.exe & DEL /F /A Container.o & DEL /F /A Arbol.o & DEL /F /A NodeH.o & DEL /F /A Node.o & DEL /F /A Maze.o & g++ -c Node.cpp & g++ -c NodeH.cpp & g++ -c Container.cpp & g++ -c Arbol.cpp & g++ -c Maze.cpp & g++ Node.o NodeH.o Arbol.o Container.o Maze.o main.cpp -o a.exe && a
